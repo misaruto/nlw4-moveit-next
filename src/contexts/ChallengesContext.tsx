@@ -1,4 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import api from "../services/api";
 
 interface ChallengeProps {
@@ -17,10 +23,11 @@ export type ChallengeContextData = {
   levelUp: () => void;
   startNewChallenge: () => void;
   resetChallenge: () => void;
+  completeChallenge: () => void;
 };
 
 export type ChallengeProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const ChallengeContext = createContext<ChallengeContextData>(
@@ -28,10 +35,20 @@ const ChallengeContext = createContext<ChallengeContextData>(
 );
 
 export const useChallengeController = () => {
-  const { startNewChallenge, resetChallenge, activeChallenge } = useContext(
-    ChallengeContext
-  );
-  return { startNewChallenge, resetChallenge, activeChallenge };
+  const {
+    startNewChallenge,
+    resetChallenge,
+    activeChallenge,
+    completeChallenge,
+    challengesCompleted,
+  } = useContext(ChallengeContext);
+  return {
+    startNewChallenge,
+    resetChallenge,
+    activeChallenge,
+    completeChallenge,
+    challengesCompleted,
+  };
 };
 
 export const useExperienceAndLevelsController = () => {
@@ -62,7 +79,6 @@ export const ChallengesProvider: React.FC<ChallengeProviderProps> = ({
   function levelUp() {
     setLevel(level + 1);
   }
-
   async function startNewChallenge() {
     const challenge = await api.get();
     setActiveChallenge(challenge);
@@ -71,7 +87,28 @@ export const ChallengesProvider: React.FC<ChallengeProviderProps> = ({
   function resetChallenge() {
     setActiveChallenge(null);
   }
+  async function completeChallenge() {
+    if (!activeChallenge) {
+      return;
+    }
+    const { amount } = activeChallenge;
 
+    let finalExperience = currentExperience + amount;
+
+    if (finalExperience >= experienceToNextLevel) {
+      finalExperience = finalExperience - experienceToNextLevel;
+      setCurrentExperience(experienceToNextLevel - currentExperience);
+      levelUp();
+    }
+    setCurrentExperience(finalExperience);
+    setActiveChallenge(null);
+    setChallengesCompleted(challengesCompleted + 1);
+  }
+  useEffect(() => {
+    if (currentExperience >= experienceToNextLevel) {
+      levelUp();
+    }
+  }, [currentExperience, experienceToNextLevel]);
   return (
     <ChallengeContext.Provider
       value={{
@@ -83,6 +120,7 @@ export const ChallengesProvider: React.FC<ChallengeProviderProps> = ({
         levelUp,
         startNewChallenge,
         resetChallenge,
+        completeChallenge,
       }}
     >
       {children}

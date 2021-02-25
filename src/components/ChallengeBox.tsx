@@ -1,7 +1,11 @@
 import { useChallengeController } from "../contexts/ChallengesContext";
 import styles from "../styles/components/ChallengeBox.module.css";
 const ChallengeBox = () => {
-  const { activeChallenge, resetChallenge } = useChallengeController();
+  const {
+    activeChallenge,
+    resetChallenge,
+    completeChallenge,
+  } = useChallengeController();
   return (
     <div className={styles.challengeBoxContainer}>
       {activeChallenge ? (
@@ -19,7 +23,11 @@ const ChallengeBox = () => {
             >
               Falhei
             </button>
-            <button type="button" className={styles.challengeSucceededButton}>
+            <button
+              type="button"
+              className={styles.challengeSucceededButton}
+              onClick={completeChallenge}
+            >
               Completei
             </button>
           </footer>
