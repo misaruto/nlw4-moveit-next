@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useChallengeController } from "../contexts/ChallengesContext";
 import styles from "../styles/components/ChallengeBox.module.css";
 const ChallengeBox = () => {
-  const [hasActiveChallenge, setHasActiveChallenge] = useState(true);
+  const { activeChallenge, resetChallenge } = useChallengeController();
   return (
     <div className={styles.challengeBoxContainer}>
-      {hasActiveChallenge ? (
+      {activeChallenge ? (
         <div className={styles.challengeActive}>
-          <header>Ganhe 400xp</header>
+          <header>{`Ganhe ${activeChallenge.amount}xp`}</header>
           <main>
-            <img src="icons/body.svg" />
-            <p>Levante e faça uma caminhada de 3min</p>
+            <img src={`icons/${activeChallenge.type}.svg`} />
+            <p>{activeChallenge.description}</p>
           </main>
           <footer>
-            <button type="button" className={styles.challengeFailedButton}>
+            <button
+              type="button"
+              className={styles.challengeFailedButton}
+              onClick={resetChallenge}
+            >
               Falhei
             </button>
             <button type="button" className={styles.challengeSucceededButton}>
