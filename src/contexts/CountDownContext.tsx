@@ -53,6 +53,7 @@ export const CountdownProvider: React.FC<CountdownProviderProps> = ({
     clearTimeout(countDownTimeout);
     setTime(0.1 * 60);
     setIsActive(false);
+    setHasFinished(false);
   }
   useEffect(() => {
     if (isActive && time > 0) {
