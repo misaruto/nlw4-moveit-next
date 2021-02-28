@@ -11,7 +11,7 @@ const ExperienceBar = () => {
   const percentToNextLevel =
     Math.round(currentExperience * 100) / experienceToNextLevel;
 
-  const experienceOfPreviouslyLevel = Math.pow((level - 1) * 4, 2);
+  const experienceOfPreviouslyLevel = level !== 0 ? Math.pow(level * 4, 2) : 0;
 
   return (
     <header className={styles.experienceBar}>
