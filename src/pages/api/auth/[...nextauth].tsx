@@ -8,7 +8,10 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
-
+  jwt: {
+    encryption: true,
+    secret: process.env.SECRET,
+  },
   callbacks: {
     async signIn(user, account, profile) {
       return true;
