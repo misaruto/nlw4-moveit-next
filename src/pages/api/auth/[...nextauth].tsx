@@ -19,5 +19,15 @@ export default NextAuth({
     async redirect(url, baseUrl) {
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
+    async signIn(user, account, profile) {
+      return true;
+    },
+    async session(session, user) {
+      localStorage.setItem('use', JSON.stringify(user));
+      return session;
+    },
+    async jwt(token, user, account, profile, isNewUser) {
+      return token;
+    },
   },
 });
