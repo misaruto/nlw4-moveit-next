@@ -1,5 +1,5 @@
-import { useExperienceAndLevelsController } from "../contexts/ChallengesContext";
-import styles from "../styles/components/Profile.module.css";
+import { useExperienceAndLevelsController } from '../contexts/ChallengesContext';
+import styles from '../styles/components/Profile.module.css';
 const Profile = () => {
   const { level } = useExperienceAndLevelsController();
   return (

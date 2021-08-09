@@ -1,12 +1,9 @@
-import { useEffect } from "react";
-import { useExperienceAndLevelsController } from "../contexts/ChallengesContext";
-import styles from "../styles/components/ExperienceBar.module.css";
+import { useEffect } from 'react';
+import { useExperienceAndLevelsController } from '../contexts/ChallengesContext';
+import styles from '../styles/components/ExperienceBar.module.css';
 const ExperienceBar = () => {
-  const {
-    currentExperience,
-    experienceToNextLevel,
-    level,
-  } = useExperienceAndLevelsController();
+  const { currentExperience, experienceToNextLevel, level } =
+    useExperienceAndLevelsController();
 
   const percentToNextLevel =
     Math.round(currentExperience * 100) / experienceToNextLevel;

@@ -1,4 +1,4 @@
-import challenges from "./challenges.json";
+import challenges from './challenges.json';
 
 function getRandomNumber() {
   return Math.floor(Math.random() * challenges.length);

@@ -1,5 +1,5 @@
-import { useChallengeController } from "../contexts/ChallengesContext";
-import styles from "../styles/components/CompletedChallenges.module.css";
+import { useChallengeController } from '../contexts/ChallengesContext';
+import styles from '../styles/components/CompletedChallenges.module.css';
 const CompletedChallenges = () => {
   const { challengesCompleted } = useChallengeController();
   return (

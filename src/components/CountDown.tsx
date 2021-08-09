@@ -1,5 +1,5 @@
-import { useCountdown } from "../contexts/CountDownContext";
-import styles from "../styles/components/CountDown.module.css";
+import { useCountdown } from '../contexts/CountDownContext';
+import styles from '../styles/components/CountDown.module.css';
 
 const CountDown = () => {
   const {
@@ -11,8 +11,8 @@ const CountDown = () => {
     startCountDown,
   } = useCountdown();
 
-  const [minuteLeft, minuteRight] = String(minutes).padStart(2, "0").split("");
-  const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
+  const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
+  const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
   return (
     <div>

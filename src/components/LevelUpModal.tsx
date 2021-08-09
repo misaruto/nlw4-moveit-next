@@ -1,5 +1,5 @@
-import { useExperienceAndLevelsController } from "../contexts/ChallengesContext";
-import styles from "../styles/components/LevelUpModal.module.css";
+import { useExperienceAndLevelsController } from '../contexts/ChallengesContext';
+import styles from '../styles/components/LevelUpModal.module.css';
 
 const LevelUpModal = () => {
   const { level, closeLevelUpModal } = useExperienceAndLevelsController();

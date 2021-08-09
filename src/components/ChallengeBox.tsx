@@ -1,12 +1,9 @@
-import { useChallengeController } from "../contexts/ChallengesContext";
-import { useCountdown } from "../contexts/CountDownContext";
-import styles from "../styles/components/ChallengeBox.module.css";
+import { useChallengeController } from '../contexts/ChallengesContext';
+import { useCountdown } from '../contexts/CountDownContext';
+import styles from '../styles/components/ChallengeBox.module.css';
 const ChallengeBox = () => {
-  const {
-    activeChallenge,
-    resetChallenge,
-    completeChallenge,
-  } = useChallengeController();
+  const { activeChallenge, resetChallenge, completeChallenge } =
+    useChallengeController();
 
   const { resetCountDown } = useCountdown();
 
